@@ -1,5 +1,59 @@
-<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
-  <iframe frameborder="0" height="100%" width="100%"
-    src="https://youtube.com/embed/_ujEGbyY8AY?autoplay=1&controls=0&showinfo=0&autohide=1">
-  </iframe>
-</div>
+<head>
+   <styles>
+      .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+      }
+      .bg-video #player {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      }
+      .bg-video .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      }
+   </styles>
+   <script>
+      // Loads the YouTube IFrame API JavaScript code.
+      var tag = document.createElement("script")
+      tag.src = "https://www.youtube.com/iframe_api"
+      // Inserts YouTube JS code into the page.
+      var firstScriptTag = document.getElementsByTagName("script")[0]
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+      
+      var player
+      
+      // onYouTubeIframeAPIReady() is called when the IFrame API is ready to go.
+      function onYouTubeIframeAPIReady() {
+      player = new YT.Player("player", {
+        videoId: "_ujEGbyY8AY", // the ID of the video (mentioned above)
+        playerVars: {
+          autoplay: 1, // start automatically
+          controls: 0, // don't show the controls (we can't click them anyways)
+          modestbranding: 1, // show smaller logo
+          loop: 1, // loop when complete
+          playlist: "_ujEGbyY8AY" // required for looping, matches the video ID
+        }
+      })
+      }
+   </script>
+</head>
+<body>
+   <div class="bg-video">
+      <div class="overlay"></div>
+      <div id="player"></div>
+   </div>
+</body>
